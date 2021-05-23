@@ -1,0 +1,116 @@
+{%load static%}
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://colorlib.com/etc/lf/Login_v6/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Login V6</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="icon" type="image/png" href="https://colorlib.com/etc/lf/Login_v6/images/icons/favicon.ico">
+
+<link rel="stylesheet" type="text/css" href="{% static './Login_files/bootstrap.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static './Login_files/font-awesome.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static './Login_files/material-design-iconic-font.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static './Login_files/animate.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static './Login_files/hamburgers.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static './Login_files/animsition.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static './Login_files/select2.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static './Login_files/daterangepicker.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static './Login_files/util.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static './Login_files/main.css' %}">
+
+</head>
+<body>
+<div class="limiter">
+<div class="container-login100">
+<div class="wrap-login100 p-t-85 p-b-20">
+<form class="login100-form validate-form" method="POST">
+    {% csrf_token %}
+
+<span class="login100-form-title p-b-70">
+Регистрация
+</span>
+<span class="login100-form-avatar">
+<img src="{% static 'images/logo.png' %}" alt="AVATAR">
+</span>
+<div class="wrap-input100 validate-input m-b-50" data-validate="Имя">
+<input class="input100" type="text" name="firstname">
+<span class="focus-input100" data-placeholder="Введите имя"></span>
+</div>
+<div class="wrap-input100 validate-input m-b-50" data-validate="Фамилия">
+<input class="input100" type="text" name="lastname">
+<span class="focus-input100" data-placeholder="Введите фамилию"></span>
+</div>
+<div class="wrap-input100 validate-input m-b-50" data-validate="E-mail">
+<input class="input100" type="email" name="email">
+<span class="focus-input100" data-placeholder="Введите свою почту"></span>
+</div>
+<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Введите имя пользователя">
+<input class="input100" type="text" name="username">
+<span class="focus-input100" data-placeholder="Имя пользователя"></span>
+</div>
+<div class="wrap-input100 validate-input m-b-50" data-validate="Введите пароль">
+<input class="input100" type="password" name="password">
+<span class="focus-input100" data-placeholder="Пароль"></span>
+</div>
+<div class="wrap-input100 validate-input m-b-50" data-validate="Подтвердите пароль">
+<input class="input100" type="password" name="confirm_password">
+<span class="focus-input100" data-placeholder="Подтверждение пароля"></span>
+</div>
+<div class="container-login100-form-btn">
+<button class="login100-form-btn">
+Войти
+</button>
+</div>
+<ul class="login-more p-t-190">
+<li>
+<span class="txt1">
+	Есть аккаунт?
+</span>
+<a href="{% url "signin"%}" class="txt2">
+Авторизоваться
+</a>
+</li>
+</ul>
+</form>
+</div>
+</div>
+</div>
+<div id="dropDownSelect1"></div>
+
+
+<script type="text/javascript" async="" src="{% static './Login_files/analytics.js' %}"></script><script src="{% static './Login_files/jquery-3.2.1.min.js' %}"></script>
+
+<script src="{% static './Login_files/animsition.min.js' %}"></script>
+
+<script src="{% static './Login_files/popper.js' %}"></script>
+<script src="{% static './Login_files/bootstrap.min.js' %}"></script>
+
+<script src="{% static './Login_files/select2.min.js' %}"></script>
+
+<script src="{% static './Login_files/moment.min.js' %}"></script>
+<script src="{% static './Login_files/daterangepicker.js' %}"></script>
+
+<script src="{% static './Login_files/countdowntime.js' %}"></script>
+
+<script src="{% static './Login_files/main.js' %}"></script>
+
+<script async="" src="{% static './Login_files/js' %}"></script>
+<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-23581568-13');
+	</script>
+
+
+</body></html>

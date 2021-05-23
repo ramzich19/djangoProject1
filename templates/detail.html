@@ -1,0 +1,488 @@
+{% load static %}
+{% load hitcount_tags %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>ELAB - Social Network</title>
+
+<!-- Fonts Online -->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+<!-- Style Sheet -->
+<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+<link rel="stylesheet" href="{% static 'css/main-style.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+
+  <!-- Top Toolbar -->
+  <div class="toolbar">
+    <div class="uou-block-1a blog">
+      <div class="container">
+
+        <ul class="social">
+          <li><a href="https://www.facebook.com/elabasia_digital_academy-105324734595469/" class="fa fa-facebook"></a></li>
+          <li><a href="https://www.instagram.com/elab.asia_digital_academy/?hl=ru" class="fa fa-instagram"></a></li>
+          <li><a href="https://www.youtube.com/channel/UCjwLOs7tgaZ1ArqTv10r8Zw" class="fa fa-youtube"></a></li>
+        </ul>
+        <div class="language"> <a href="#" class="toggle"><img src="{% static 'images/flags/48/RU.png' %}" alt=""> Личный Кабинет</a>
+
+          <ul>
+            {% if request.user.is_authenticated %}
+            {% url 'signout' as url_signout %}
+            <li><a href="{{url_signout}}"> Выйти</a></li>
+            {%else%}
+            {% url 'signin' as url_signin %}
+            <li{% if url_signin == request.path %}active{% endif %}><a href="{{ url_signin }}"> Авторизация</a></li>
+            {% url 'signup' as url_signup %}
+            <li{% if url_signup == request.path %}active{% endif %}><a href="{{ url_signup }}"> Регистрация</a></li>
+            {%endif%}
+          </ul>
+
+        </div>
+
+
+
+        <div class="language"> <a href="#" class="toggle"><img src="{% static 'images/flags/48/RU.png' %}" alt=""> RUS</a>
+          <ul>
+            <li><a href="#"><img src="{% static 'images/flags/32/US.png' %}" alt=""> ENG</a></li>
+            <li><a href="#"><img src="{% static 'images/flags/32/KZ.png' %}" alt=""> KZ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- end .uou-block-1a -->
+  </div>
+  <!-- end toolbar -->
+
+  <div class="box-shadow-for-ui">
+    <div class="uou-block-2b">
+      <div class="container"> <a href="index.html" class="logo"><img src="{% static 'images/logo.png' %}" alt=""></a>
+        <nav class="nav">
+          <ul class="sf-menu">
+            <li><a href="{% url "index"%}"><i class="fa  fa-home"></i></a></li>
+            {% if request.user.is_authenticated %}
+            {% url 'profile' as url_profile %}
+            <li> <a href="{% url "profile"%}">Профиль</a></li>
+            {%else%}
+            {%endif%}
+            <li class="active"><a href="{% url "home"%}">Блог</a></li>
+            <li><a href="{% url "projects"%}">Конференции и мероприятия</a></li>
+            <li><a href="{% url "contact"%}">Контакты</a></li>
+            {% if request.user.is_authenticated %}
+            {% url 'edit_page' as url_edit_page %}
+            <li><a href="{% url "edit_page"%}">Добавить свою статью</a></li>
+            {%else%}
+            {%endif%}
+          </ul>
+        </nav>
+        <div class="hamburger-menu">
+  <input id="menu__toggle" type="checkbox" />
+  <label class="menu__btn" for="menu__toggle" style="z-index: 11;">
+    <span></span>
+  </label>
+  <ul class="menu__box" style="z-Index: 10">
+    <li><a class="menu__item" href="{% url "index"%}">Главная</a></li>
+    {% if request.user.is_authenticated %}
+    {% url 'profile' as url_profile %}
+    <li><a class="menu__item" href="{% url "profile"%}">Профиль</a></li>
+    {%else%}
+    {%endif%}
+    <li><a class="menu__item" href="{% url "home"%}">Блог</a></li>
+    <li><a class="menu__item" href="{% url "projects"%}">Конференции и мероприятия</a></li>
+    {% if request.user.is_authenticated %}
+    {% url 'edit_page' as url_edit_page %}
+        <li><a class="menu__item" href="{% url "edit_page"%}">Добавить свою статью</a></li>
+        {%else%}
+        {%endif%}
+            <li><a class="menu__item" href="{% url "contact"%}">Контакты</a></li>
+            {% if request.user.is_authenticated %}
+            {% url 'signout' as url_signout %}
+            <li><a class="menu__item" href="{{url_signout}}">Выйти</a></li>
+            {%else%}
+            {% url 'signin' as url_signin %}
+            <li><a class="menu__item" href="{{ url_signin }}">Авторизация</a></li>
+              {% url 'signup' as url_signup %}
+            <li><a class="menu__item" href="{{ url_signup }}">Регистрация</a></li>
+              {%endif%}
+
+
+
+  </ul>
+      </div>
+    </div>
+    <!-- end .uou-block-2b -->
+  </div>
+
+
+
+  <!-- SUB Banner -->
+  <div class="profile-bnr sub-bnr user-profile-bnr">
+    <div class="position-center-center">
+      <div class="container">
+        <h2>Статья</h2>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="blog-content pt60">
+    <div class="container">
+      <div class="row">
+        {% block content %}
+        <div class="col-md-9">
+          <article class="uou-block-7f blog-post-content">
+            {% if get_article.image.url == get_article.image.url %}
+
+                 <p><img src="{{get_article.image.url }}"><p>
+                     {%else%}
+                   {%endif%}
+
+            <div class="meta">
+              <span class="time-ago">{{ get_article.create_date}}</span>
+              <span class="category"><a href="#" class="comments">{{ get_article.comments_articles.all.count }} Комментариев</a> </span>
+              <a href="#" class="comments">{% get_hit_count for get_article %} Просмотров</a>
+            </div>
+
+            <h1><a href="#">{{ get_article.name }}</a></h1>
+
+
+
+
+
+            <p>{{ get_article.text}}</p>
+
+
+            {% if request.user.photo.url != '' %}
+            <img src="{{get_article.user_photo}}" class="author-blog-image">
+            {%else%}
+            {%endif%}
+
+
+
+
+            <a class="btn btn-primary "href="{%url "home"%}">Назад к статьям</a>
+            {% endblock %}
+          </article> <!-- end .uou-block-7f -->
+
+<!--
+          <form action="/action_page.php">
+            <div class="container">
+              <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+              <h1></h1>
+
+              <hr>
+
+
+
+
+  <p>Для просмотра комментариев, зарегестрируйтесь</p>
+</h2>
+<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+<div class="accordion-body">
+<strong><label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+        <hr>
+
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+
+                    </button>
+                  </h2>
+                </div>
+
+
+
+                                  <button type="submit" class="registerbtn">Register</button>
+
+          </form> -->
+          <section class="main-content920">
+              <div class="container">
+                  <div class="row">
+
+                      <div class="col-md-9">
+                      <div class="ask-question-input-part032">
+
+                            <h4>Оставить заявку</h4>
+
+                          <form method="post" action="{% url 'zayavka_view' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                          <div class="username-part940">
+                              <span class="form-description43">Имя </span><input type="text" name="name" class="username029" placeholder="Введите своё имя" style="color:black;">
+                            </div>
+                            <div class="email-part320">
+                              <span class="form-description442">Почта</span><input type="text" name="email" class="email30" placeholder="Введите свою почту" style="color:black;">
+                              </div>
+                              <div class="question-title39">
+                                <input type="hidden" name="description" value="{{ get_article.name}}" class="question-ttile32" placeholder="Введите заголовок вопроса" style="color:black;">
+                              </div>
+                              <div class="question-title39">
+                                <span><label>Номер телефона</label></span>
+                                <span><input placeholder="Введите номер телефона" name="phone" type="Tel" style="color:black;"></span>
+
+                              </div>
+
+
+
+                       <div class="publish-button2389">
+
+                          <input href="#" type="submit" value="Отправить" class="btn" style="display: inline-block;
+          margin-bottom: 0;
+          font-weight: inherit;
+          text-align: center;
+          vertical-align: middle;
+          touch-action: manipulation;
+          cursor: pointer;
+          background-image: none;
+          border: 0;
+          white-space: nowrap;
+          color: #ffffff;
+          padding: 8px 21.312px;
+          transition: all 0.3s;
+          border-radius: 3px;
+          text-transform: uppercase;
+          font-size: 13px;
+          font-family: 'Montserrat', sans-serif;
+          background-color: #0099ff;
+          border: 2px solid #0099ff;">
+                          </form>
+                      </div>
+
+                      </div>
+
+
+                      </div>
+      <!--                end of col-md-9 -->
+
+      <!--           strart col-md-3 (side bar)-->
+
+                  </div>
+              </div>
+          </section>
+
+          <div class="uou-post-comment">
+            <aside class="uou-block-14a">
+              <h5 class="sidebar-title">Комментарии({{ get_article.comments_articles.all.count }})</h5>
+              <ul>
+
+
+
+
+<ul>
+      {% for item in get_article.comments_articles.all %}
+                  <article class="comment">
+                    <img src="{{item.user_photo}}" alt="">
+
+                    <div>
+                      <header>
+                        <a href="#" class="user">{{ item.user_name }} {{ item.user_firstname }}</a>
+
+                        <span class="time-ago">{{ item.create_date }}</span>
+                      </header>
+
+                      <p>{{ item.text }}</p>
+
+
+                      <p>Статус комментария:{{ item.status }}</p>
+                      {% if item.article.author == request.user %}
+
+                      <div class="btn-update-status">
+
+
+                <a class="update_status" data-url="{% url 'update_comment_status' item.id 'public' %}"href="#" style="
+              background-color: #0099ff;
+              border: 2px solid #0099ff
+              display: inline-block;
+              margin-bottom: 0;
+              font-weight: inherit;
+              text-align: center;
+              vertical-align: middle;
+              touch-action: manipulation;
+              cursor: pointer;
+              background-image: none;
+              border: 0;
+              white-space: nowrap;
+              color: #ffffff;
+              padding: 8px 21.312px;
+              transition: all 0.3s;
+              border-radius: 13px;
+              text-transform: uppercase;
+              font-size: 13px;
+              font-family: 'Montserrat', sans-serif;">Опубликовать</a>
+        <a class="update_status" data-url="{% url 'update_comment_status' item.id 'delete' %}"href="#" style="
+
+                background-color: #0099ff;
+                border: 2px solid #0099ff
+                display: inline-block;
+                margin-bottom: 0;
+                font-weight: inherit;
+                text-align: center;
+                vertical-align: middle;
+                touch-action: manipulation;
+                cursor: pointer;
+                background-image: none;
+                border: 0;
+                white-space: nowrap;
+                color: #ffffff;
+                padding: 8px 21.312px;
+                transition: all 0.3s;
+                border-radius: 13px;
+                text-transform: uppercase;
+                font-size: 13px;
+                font-family: 'Montserrat', sans-serif;
+                margin-left:13px;">Удалить</a>
+                 {% endif %}
+                    </div>
+                  </article>
+                  </li>
+              {%endfor%}
+
+
+              </ul>
+            </aside> <!-- end .uou-block-14a -->
+
+            <h4>Оставить комментарий</h4>
+            <div class="uou-post-comment-form">
+              <form action="" id="form" method="post">
+                <div class="row">
+                  <div class="col-sm-12">
+                      {% csrf_token %}
+                    <textarea name = 'text' placeholder="Your comment"></textarea>
+
+
+
+
+
+                    {% if request.user.profile.photo.url == request.user.profile.photo.url %}
+                      <input type="hidden" name="user_photo" value="{{request.user.profile.photo.url}}">
+
+                    {%else%}
+                    <input type="hidden" name="user_photo" value="https://proumnyjdom.ru/wp-content/uploads/2019/05/word-image-30.jpeg">
+                    {%endif%}
+
+
+                    <input type="hidden" name="user_name" value="{{request.user.first_name}}">
+                    <input type="hidden" name="user_firstname" value="{{request.user.last_name}}">
+
+                        </div>
+
+                  <div class="col-sm-12">
+                    <button form="form" class="btn btn-primary">Добавить комментарий</button>
+                  </div>
+
+                </div> <!-- end row -->
+              </form>
+            </div>
+
+          </div>
+        </div> <!-- end grid layout -->
+        {% block js %}
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+  $('body').on('click', '.update_status',function (event){
+      event.preventDefault();
+      if (confirm('Вы уверены')) {
+          var url = $(this).attr('data-url')
+          var tag_li = $(this).parent()
+
+          console.log(url)
+
+          $.ajax({
+              url:url,
+              type: 'GET',
+              success: function (response){
+                  tag_li.html(response)
+                  console.log(response)
+              }
+          })
+      }
+  })
+
+      </script>
+
+      {% endblock %}
+
+
+        <div class="col-md-3">
+          <div class="uou-sidebar">
+
+            <h5 class="sidebar-title">О нас</h5>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi.</p>
+
+
+            <h5 class="sidebar-title">Популярные статьи</h5>
+
+            <div class="latest-post-widget">
+              <div class="post-single">
+                <img src="img/p-post-1.png" alt="">
+                <p class="meta">January 12, 2015</p>
+                <p class="meta">Design</p>
+                <h6 class="post-title"><a href="#">Pariatur Vellit Corrupti Goes Into 2 Lines</a></h6>
+
+              </div>
+
+              <div class="post-single">
+                <img src="img/p-post-2.png" alt="">
+                <p class="meta">January 12, 2015</p>
+                <p class="meta">Design</p>
+                <h6 class="post-title"><a href="#">Pariatur Vellit Corrupti Goes Into 2 Lines</a></h6>
+
+              </div>
+
+              <div class="post-single">
+                <img src="img/p-post-3.png" alt="">
+                <p class="meta">January 12, 2015</p>
+                <p class="meta">Design</p>
+                <h6 class="post-title"><a href="#">Pariatur Vellit Corrupti Goes Into 2 Lines</a></h6>
+
+              </div>
+            </div> <!-- end latest-post-widget -->
+
+          </div> <!-- end uou-sidebar -->
+        </div>
+
+      </div> <!-- end row -->
+
+    </div> <!-- edn cotainer -->
+
+  </div> <!-- end blog-content -->
+
+</div>
+
+
+<!-- Scripts -->
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/plugins/superfish.min.js' %}"></script>
+<script src="{% static 'js/jquery.ui.min.js' %}"></script>
+<script src="{% static 'js/plugins/rangeslider.min.js' %}"></script>
+<script src="{% static 'js/plugins/jquery.flexslider-min.js' %}"></script>
+<script src="{% static 'js/uou-accordions.js' %}"></script>
+<script src="{% static 'js/uou-tabs.js' %}"></script>
+<script src="{% static 'js/plugins/select2.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/gmap3.min.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
